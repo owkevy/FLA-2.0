@@ -23,7 +23,6 @@ Tecnologias utilizadas
 
 [ Acessar o FLA ](https://owkevy.github.io/FLA-2.0/)
 
-Acessar FLA — Financial Liquidity Assurance
 
 Observação
 
