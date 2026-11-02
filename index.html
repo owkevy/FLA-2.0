@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FLA | Financial Liquidity Assurance</title>
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            background: #080a0f;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        header {
+
+            background: #10131b;
+
+            padding: 22px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #252a35;
+
+        }
+
+        .logo {
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            color: #ffffff;
+
+        }
+
+        .logo span {
+
+            color: #e63946;
+
+        }
+
+        .status {
+
+            color: #35c98a;
+
+            font-size: 13px;
+
+        }
+
+        main {
+
+            padding: 35px 40px;
+
+        }
+
+        .welcome h1 {
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .welcome p {
+
+            color: #858c9c;
+
+            margin-bottom: 30px;
+
+        }
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+        .card {
+
+            background: #131722;
+
+            border: 1px solid #262d3a;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+        }
+
+        .card p {
+
+            color: #969eae;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .card h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .positive {
+
+            color: #35c98a;
+
+            font-size: 12px;
+
+        }
+
+        .warning {
+
+            color: #f0ad4e;
+
+            font-size: 12px;
+
+        }
+
+        .panel {
+
+            background: #131722;
+
+            border: 1px solid #262d3a;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+        }
+
+        .panel h2 {
+
+            font-size: 19px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .panel p {
+
+            color: #969eae;
+
+            font-size: 14px;
+
+        }
+
+        .chart {
+
+            height: 180px;
+
+            margin-top: 20px;
+
+            border-radius: 8px;
+
+            background: #0c1019;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #70798a;
+          position: relative;
+
+        }
+
+        .alert {
+
+            background: #1b202c;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 12px;
+
+            font-size: 14px;
+
+        }
+
+        .alert span {
+
+            color: #e63946;
+
+            margin-right: 8px;
+
+        }
+
+        footer {
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #626b7c;
+
+            font-size: 12px;
+
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+
+                padding: 20px;
+
+            }
+
+            main {
+
+                padding: 25px 20px;
+
+            }
+
+            .cards {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">FLA<span>.</span></div>
+
+        <div class="status">● Sistema operacional</div>
+
+    </header>
+
+    <main>
+
+        <section class="welcome">
+
+            <h1>Painel de Monitoramento</h1>
+
+            <p>Financial Liquidity Assurance | Segurança e estabilidade financeira</p>
+
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+
+                <p>Índice de Liquidez</p>
+
+                <h2 id="indicadorLiquidez">1,85</h2>
+
+                <span class="positive">Indicador simulado</span>
+
+            </div>
+
+            <div class="card">
+
+                <p>Nível de Risco</p>
+
+                <h2 id="nivelRisco">Baixo</h2>
+
+                <span class="positive">Indicador simulado</span>
+
+            </div>
+
+            <div class="card">
+
+                <p>Alertas Ativos</p>
+
+                <h2>03</h2>
+
+                <span class="warning">Dados demonstrativos</span>
+
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Monitoramento de Liquidez</h2>
+          <div style="margin-top: 20px;">
+    <label for="liquidez">Informe o índice de liquidez:</label>
+
+    <input
+        type="number"
+        id="liquidez"
+        step="0.01"
+        placeholder="Ex: 1.50"
+        style="padding: 10px; margin: 10px; border-radius: 6px;"
+    >
+
+    <button onclick="analisarRisco()">
+        Analisar risco
+    </button>
+
+    <h3 id="resultadoRisco" style="margin-top: 20px;">
+    </h3>
+</div>
+
+            <p>Acompanhamento dos indicadores financeiros.</p>
+
+            <div class="chart">
+
+                <canvas id="liquidityChart"></canvas>
+
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Alertas de Segurança</h2>
+          <button onclick="atualizarAlertas()" class="btn-alerta">
+    Atualizar alertas
+</button>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Atenção: variação no indicador de liquidez.
+
+            </div>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Monitoramento de risco em andamento.
+
+            </div>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Análise financeira atualizada.
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        FLA © 2026 | Financial Liquidity Assurance
+
+        <br><br>
+
+        Ambiente demonstrativo — dados simulados.
+
+    </footer>
+
+</body>
+
+</html><!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FLA | Financial Liquidity Assurance</title>
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            background: #080a0f;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        header {
+
+            background: #10131b;
+
+            padding: 22px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #252a35;
+
+        }
+
+        .logo {
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            color: #ffffff;
+
+        }
+
+        .logo span {
+
+            color: #e63946;
+
+        }
+
+        .status {
+
+            color: #35c98a;
+
+            font-size: 13px;
+
+        }
+
+        main {
+
+            padding: 35px 40px;
+
+        }
+
+        .welcome h1 {
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .welcome p {
+
+            color: #858c9c;
+
+            margin-bottom: 30px;
+
+        }
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+        .card {
+
+            background: #131722;
+
+            border: 1px solid #262d3a;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+        }
+
+        .card p {
+
+            color: #969eae;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .card h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .positive {
+
+            color: #35c98a;
+
+            font-size: 12px;
+
+        }
+
+        .warning {
+
+            color: #f0ad4e;
+
+            font-size: 12px;
+
+        }
+
+        .panel {
+
+            background: #131722;
+
+            border: 1px solid #262d3a;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+        }
+
+        .panel h2 {
+
+            font-size: 19px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .panel p {
+
+            color: #969eae;
+
+            font-size: 14px;
+
+        }
+
+        .chart {
+
+            height: 180px;
+
+            margin-top: 20px;
+
+            border-radius: 8px;
+
+            background: #0c1019;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #70798a;
+
+        }
+
+        .alert {
+
+            background: #1b202c;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 12px;
+
+            font-size: 14px;
+
+        }
+
+        .alert span {
+
+            color: #e63946;
+
+            margin-right: 8px;
+
+        }
+
+        footer {
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #626b7c;
+
+            font-size: 12px;
+
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+
+                padding: 20px;
+
+            }
+
+            main {
+
+                padding: 25px 20px;
+
+            }
+
+            .cards {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">FLA<span>.</span></div>
+
+        <div class="status">● Sistema operacional</div>
+
+    </header>
+
+    <main>
+
+        <section class="welcome">
+
+            <h1>Painel de Monitoramento</h1>
+
+            <p>Financial Liquidity Assurance | Segurança e estabilidade financeira</p>
+
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+
+                <p>Índice de Liquidez</p>
+
+                <h2>1,85</h2>
+
+                <span class="positive">Indicador simulado</span>
+
+            </div>
+
+            <div class="card">
+
+                <p>Nível de Risco</p>
+
+                <h2>Baixo</h2>
+
+                <span class="positive">Indicador simulado</span>
+
+            </div>
+
+            <div class="card">
+
+                <p>Alertas Ativos</p>
+
+                <h2>03</h2>
+
+                <span class="warning">Dados demonstrativos</span>
+
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Monitoramento de Liquidez</h2>
+
+            <p>Acompanhamento dos indicadores financeiros.</p>
+
+            <div class="chart">
+<div class="chart">
+    <canvas id="liquidityChart"></canvas>
+</div>
+
+        <section class="panel">
+
+            <h2>Alertas de Segurança</h2>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Atenção: variação no indicador de liquidez.
+
+            </div>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Monitoramento de risco em andamento.
+
+            </div>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Análise financeira atualizada.
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        FLA © 2026 | Financial Liquidity Assurance
+
+        <br><br>
+
+        Ambiente demonstrativo — dados simulados.
+
+    </footer>
+
+</body>
+
+</html><!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FLA | Financial Liquidity Assurance</title>
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+        body {
+
+            background: #080a0f;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+
+        }
+
+        header {
+
+            background: #10131b;
+
+            padding: 22px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #252a35;
+
+        }
+
+        .logo {
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            color: #ffffff;
+
+        }
+
+        .logo span {
+
+            color: #e63946;
+
+        }
+
+        .status {
+
+            color: #35c98a;
+
+            font-size: 13px;
+
+        }
+
+        main {
+
+            padding: 35px 40px;
+
+        }
+
+        .welcome h1 {
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+
+        }
+
+        .welcome p {
+
+            color: #858c9c;
+
+            margin-bottom: 30px;
+
+        }
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+
+        }
+
+        .card {
+
+            background: #131722;
+
+            border: 1px solid #262d3a;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+        }
+
+        .card p {
+
+            color: #969eae;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+        }
+
+        .card h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .positive {
+
+            color: #35c98a;
+
+            font-size: 12px;
+
+        }
+
+        .warning {
+
+            color: #f0ad4e;
+
+            font-size: 12px;
+
+        }
+
+        .panel {
+
+            background: #131722;
+
+            border: 1px solid #262d3a;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            margin-bottom: 25px;
+
+        }
+
+        .panel h2 {
+
+            font-size: 19px;
+
+            margin-bottom: 12px;
+
+        }
+
+        .panel p {
+
+            color: #969eae;
+
+            font-size: 14px;
+
+        }
+
+        .chart {
+
+            height: 180px;
+
+            margin-top: 20px;
+
+            border-radius: 8px;
+
+            background: #0c1019;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #70798a;
+
+        }
+
+        .alert {
+
+            background: #1b202c;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-top: 12px;
+
+            font-size: 14px;
+
+        }
+
+        .alert span {
+
+            color: #e63946;
+
+            margin-right: 8px;
+
+        }
+
+        footer {
+
+            padding: 25px;
+
+            text-align: center;
+
+            color: #626b7c;
+
+            font-size: 12px;
+
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+
+                padding: 20px;
+
+            }
+
+            main {
+
+                padding: 25px 20px;
+
+            }
+
+            .cards {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">FLA<span>.</span></div>
+
+        <div class="status">● Sistema operacional</div>
+
+    </header>
+
+    <main>
+
+        <section class="welcome">
+
+            <h1>Painel de Monitoramento</h1>
+
+            <p>Financial Liquidity Assurance | Segurança e estabilidade financeira</p>
+
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+
+                <p>Índice de Liquidez</p>
+
+                <h2>1,85</h2>
+
+                <span class="positive">Indicador simulado</span>
+
+            </div>
+
+            <div class="card">
+
+                <p>Nível de Risco</p>
+
+                <h2>Baixo</h2>
+
+                <span class="positive">Indicador simulado</span>
+
+            </div>
+
+            <div class="card">
+
+                <p>Alertas Ativos</p>
+
+                <h2>03</h2>
+
+                <span class="warning">Dados demonstrativos</span>
+
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Monitoramento de Liquidez</h2>
+
+            <p>Acompanhamento dos indicadores financeiros.</p>
+
+            <div class="chart">
+
+                Gráfico de monitoramento financeiro
+
+            </div>
+
+        </section>
+
+        <section class="panel">
+
+            <h2>Alertas de Segurança</h2>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Atenção: variação no indicador de liquidez.
+
+            </div>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Monitoramento de risco em andamento.
+
+            </div>
+
+            <div class="alert">
+
+                <span>●</span>
+
+                Análise financeira atualizada.
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        FLA © 2026 | Financial Liquidity Assurance
+
+        <br><br>
+
+        Ambiente demonstrativo — dados simulados.
+
+    </footer>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('liquidityChart');
+  console.log(ctx);
+
+window.meuGrafico = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+            label: 'Índice de Liquidez',
+            data: [1.2, 1.4, 1.3, 1.6, 1.7, 1.85],
+            borderColor: '#e63946',
+            fill: false,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+</script>
+  <script>
+  function analisarRisco() {
+
+    const indice = Number(
+        document.getElementById('liquidez').value
+    );
+    document.getElementById('indicadorLiquidez').innerText =
+    indice.toFixed(2).replace('.', ',');
+    if (window.meuGrafico) {
+    meuGrafico.data.datasets[0].data.push(indice);
+    meuGrafico.data.labels.push('Novo');
+    meuGrafico.update();
+}
+
+    const resultado = document.getElementById('resultadoRisco');
+    const nivel = document.getElementById('nivelRisco');
+
+    if (document.getElementById('liquidez').value === '') {
+        resultado.innerHTML = 'Informe um índice para analisar.';
+        resultado.style.color = '#f0ad4e';
+        return;
+    }
+
+    if (indice < 0) {
+        resultado.innerHTML = 'Valor inválido.';
+        resultado.style.color = '#e63946';
+    }
+
+    else if (indice < 1) {
+        resultado.innerHTML = 'Risco elevado: liquidez abaixo de 1.';
+        resultado.style.color = '#e63946';
+      nivel.innerText = 'Elevado';
+      nivel.style.color = '#e63946';
+    }
+  
+
+    else if (indice < 1.5) {
+        resultado.innerHTML = 'Risco moderado: atenção à liquidez.';
+        resultado.style.color = '#f0ad4e';
+      nivel.innerText = 'Moderado';
+      nivel.style.color = '#f0ad4e';
+    }
+
+    else {
+        resultado.innerHTML = 'Risco baixo: indicador dentro do limite demonstrativo.';
+        resultado.style.color = '#35c98a';
+      nivel.innerText = 'Baixo';
+      nivel.style.color = '#35c98a';
+    }
+}
+
+</script>
+
+</body>
+
+</html>
+
