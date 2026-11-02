@@ -31,3 +31,6 @@ Os dados e critérios utilizados atualmente são simulados e têm finalidade dem
 ⸻
 
 **Desenvolvido como projeto de portfólio durante meus estudos em Análise e Desenvolvimento de Sistemas.**
+
+
+  **KEVY EDUARDO**
